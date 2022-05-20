@@ -1,11 +1,15 @@
 // Sequence pattern variable
 const pattern = [];
 
-// Get all panel buttons
+// Get all panel buttons and Add EventListeners
 const panels = document.querySelectorAll('.btn')
+panels.forEach(panel=>panel.addEventListener('click', ()=>checkButton(panel.attributes.id.value)))
 
 // Colors array
 const colors = ["green", "red", "yellow", "blue"]
+
+// Pattern Counter
+let counter = 0;
 
 // Get Next Sequence When 
 document.addEventListener('keydown', addSequence, {once: true});
@@ -14,16 +18,35 @@ document.addEventListener('keydown', addSequence, {once: true});
 function addSequence(){
     const randomNumber = Math.floor(Math.random()*4)
     pattern.push(colors[randomNumber])
-    playSound()
+    playSound( pattern[pattern.length - 1])
+    panels.forEach(panel=>panel.removeEventListener('click', checkButton))
+    console.log(pattern)
 }
 
 // Function to play audio of panel
-function playSound(){
-    const lastElement = pattern[pattern.length - 1]
-    const audio = new Audio(`../audio/${lastElement}.mp3`)
+function playSound(element){
+    
+    const audio = new Audio(`../audio/${element}.mp3`)
     audio.play()
-    document.getElementById(lastElement).classList.add('pressed')
+    document.getElementById(element).classList.add('pressed')
     setTimeout(()=>{
-        document.getElementById(lastElement).classList.remove('pressed')
+        document.getElementById(element).classList.remove('pressed')
     }, 300)
 }
+
+// Cehck clicked button
+function checkButton(value){
+
+    if(value === pattern[counter]){
+        playSound(value)
+        if(counter >= pattern.length-1){
+            setTimeout(()=>{
+                addSequence()
+                counter = 0;
+            }, 1000)
+        }else{
+            counter++
+        }
+    }else{
+    }
+}   
