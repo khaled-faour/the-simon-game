@@ -14,6 +14,9 @@ let counter = 0;
 // Level Counter
 let level = 0;
 
+// HighScore (localStorage)
+let highScore = localStorage.getItem('simon-highScore') || 0;
+
 // Get Next Sequence When 
 document.addEventListener('keydown', addSequence, {once: true});
 
@@ -29,7 +32,6 @@ function addSequence(){
 
 // Function to play audio of panel
 function playSound(element){
-    
     const audio = new Audio(`../audio/${element}.mp3`)
     audio.play()
     document.getElementById(element).classList.add('pressed')
@@ -58,5 +60,9 @@ function checkButton(value){
 
 function changeLevel(){
     level++
-    document.querySelector(".status").innerHTML = `Level: ${level}`
+    if(level > highScore){
+        localStorage.setItem('simon-highScore', level)
+        highScore = level
+    }
+    document.querySelector(".status").innerHTML = `Level: ${level} <br> High Score: ${highScore}`
 }
