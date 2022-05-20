@@ -35,3 +35,7 @@
 .blue{
     background-color: blue;
 }
+
+.pressed{
+    box-shadow: 0 0 50px white;
+}

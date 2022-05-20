@@ -16,6 +16,11 @@ function addSequence(){
 
 // Function to play audio of panel
 function playSound(){
-    const audio = new Audio(`../audio/${pattern[pattern.length - 1]}.mp3`)
+    const lastElement = pattern[pattern.length - 1]
+    const audio = new Audio(`../audio/${lastElement}.mp3`)
     audio.play()
+    document.getElementById(lastElement).classList.add('pressed')
+    setTimeout(()=>{
+        document.getElementById(lastElement).classList.remove('pressed')
+    }, 300)
 }
