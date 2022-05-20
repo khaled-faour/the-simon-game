@@ -11,11 +11,15 @@ const colors = ["green", "red", "yellow", "blue"]
 // Pattern Counter
 let counter = 0;
 
+// Level Counter
+let level = 0;
+
 // Get Next Sequence When 
 document.addEventListener('keydown', addSequence, {once: true});
 
 // Function to add sequence
 function addSequence(){
+    changeLevel()
     const randomNumber = Math.floor(Math.random()*4)
     pattern.push(colors[randomNumber])
     playSound( pattern[pattern.length - 1])
@@ -34,7 +38,7 @@ function playSound(element){
     }, 300)
 }
 
-// Cehck clicked button
+// Check clicked button
 function checkButton(value){
 
     if(value === pattern[counter]){
@@ -50,3 +54,9 @@ function checkButton(value){
     }else{
     }
 }   
+
+
+function changeLevel(){
+    level++
+    document.querySelector(".status").innerHTML = `Level: ${level}`
+}
