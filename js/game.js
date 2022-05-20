@@ -1,6 +1,9 @@
 // Sequence pattern variable
 const pattern = [];
 
+// Get all panel buttons
+const panels = document.querySelectorAll('.btn')
+
 // Colors array
 const colors = ["green", "red", "yellow", "blue"]
 
