@@ -32,7 +32,8 @@ function addSequence(){
 
 // Function to play audio of panel
 function playSound(element){
-    const audio = new Audio(`../audio/${element}.mp3`)
+    console.log("ELEMENT: ", element)
+    const audio = new Audio(`./audio/${element}.mp3`)
     audio.play()
     document.getElementById(element).classList.add('pressed')
     setTimeout(()=>{
@@ -54,6 +55,7 @@ function checkButton(value){
             counter++
         }
     }else{
+        lose()
     }
 }   
 
