@@ -68,3 +68,18 @@ function changeLevel(){
     }
     document.querySelector(".status").innerHTML = `Level: ${level} <br> High Score: ${highScore}`
 }
+
+function lose(){
+    level = 0;
+    pattern.splice(0,pattern.length)
+    document.addEventListener('keydown', addSequence, {once: true});
+    document.querySelector(".status").innerHTML = `Game Over, Press Any Key to Restart`
+    panels.forEach(panel=>panel.removeEventListener('click', ()=>checkButton(panel.attributes.id.value)))
+    document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
+    const audio = new Audio(`./audio/wrong.mp3`)
+    audio.play()
+    setTimeout(()=>{
+        document.getElementsByTagName('body')[0].style.backgroundColor = '#011F3F';
+    }, 500)
+
+}
